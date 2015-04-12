@@ -1,16 +1,16 @@
-"\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Project\Peripheral_Examples\SysTick\stm32f4xx_it.c"
+"\\psf\Home\Desktop\STM32F4-Discovery_FW\Project\STM32F4_Lab\Empty_Project\stm32f4xx_it.c"
 -std=c99
 -ferror-limit=100
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Project\Peripheral_Examples\SysTick\EWARM\..
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Project\STM32F4_Lab\Empty_Project\EWARM\..
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Project\Peripheral_Examples\SysTick\EWARM\..\..\..\..\Libraries\CMSIS\Include
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Project\STM32F4_Lab\Empty_Project\EWARM\..\..\..\..\Libraries\CMSIS\Include
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Project\Peripheral_Examples\SysTick\EWARM\..\..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Project\STM32F4_Lab\Empty_Project\EWARM\..\..\..\..\Libraries\CMSIS\ST\STM32F4xx\Include
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Project\Peripheral_Examples\SysTick\EWARM\..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Project\STM32F4_Lab\Empty_Project\EWARM\..\..\..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Project\Peripheral_Examples\SysTick\EWARM\..\..\..\..\Utilities\STM32F4-Discovery
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Project\STM32F4_Lab\Empty_Project\EWARM\..\..\..\..\Utilities\STM32F4-Discovery
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -I
@@ -18,15 +18,15 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\inc\c
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Project\Peripheral_Examples\SysTick
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Project\STM32F4_Lab\Empty_Project
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Libraries\CMSIS\Include
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Libraries\CMSIS\Include
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Libraries\CMSIS\ST\STM32F4xx\Include
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Libraries\CMSIS\ST\STM32F4xx\Include
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\inc
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Libraries\STM32F4xx_StdPeriph_Driver\inc
 -I
-\\psf\Home\Desktop\STM32F4-Discovery_FW_V1.1.0\Utilities\STM32F4-Discovery
+\\psf\Home\Desktop\STM32F4-Discovery_FW\Utilities\STM32F4-Discovery
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -DUSE_STDPERIPH_DRIVER=0
@@ -227,8 +227,8 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 6.5\arm\CMSIS\Include
 -D__HAS_LOCATED_DECLARATION__=1
 -D__HAS_LOCATED_WITH_INIT__=1
 -D__IAR_COMPILERBASE__=593160
--D__DATE__="Apr  8 2015"
--D__TIME__="22:13:44"
+-D__DATE__="Apr 12 2015"
+-D__TIME__="17:13:36"
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
 -D__STDC_HOSTED__=1

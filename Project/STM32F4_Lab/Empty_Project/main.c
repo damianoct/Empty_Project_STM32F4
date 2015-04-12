@@ -21,6 +21,11 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "stdio.h"
+#include "string.h"
+#include "ctype.h"
+#define STUDENTS_LIM 10
+#define DIP_ACCESS_NUM 4
 
 /** @addtogroup STM32F4_Discovery_Peripheral_Examples
   * @{
@@ -37,17 +42,26 @@
 GPIO_InitTypeDef GPIO_InitStructure;
 static __IO uint32_t TimingDelay;
 
+struct studente 
+{
+  char *nomeCognome;
+  char codice[5];
+  int dipAccess[DIP_ACCESS_NUM];
+  int countAccess[DIP_ACCESS_NUM];
+  int valid;
+} utenti[STUDENTS_LIM];
+  
+  int utenti_counter = 0;
+  int dip = 1;
+
+
+
 /* Private function prototypes -----------------------------------------------*/
 void Delay(__IO uint32_t nTime);
+void addUser(struct studente *s, char *nomeCognome, char *codice, char *dipAccess, int val);
+int checkStudent(struct studente *s, char *code);
 
-/* Private functions ---------------------------------------------------------*/
-
-/**
-  * @brief   Main program
-  * @param  None
-  * @retval None
-  */
-int main(void)
+main(void)
 {
   /*!< At this stage the microcontroller clock setting is already configured, 
        this is done through SystemInit() function which is called from startup
@@ -55,43 +69,19 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
         system_stm32f4xx.c file
      */     
-       
+  
   /* Initialize Leds mounted on STM32F4-Discovery board */
-  STM_EVAL_LEDInit(LED4);
-  STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED5);
   STM_EVAL_LEDInit(LED6);
+  STM_EVAL_LEDInit(LED3);
+  
+  char *p = malloc(256);
 
-  /* Turn on LED4 and LED5 */
-  STM_EVAL_LEDOn(LED4);
-  STM_EVAL_LEDOn(LED5);
-
-  /* Setup SysTick Timer for 1 msec interrupts.
-     ------------------------------------------
-    1. The SysTick_Config() function is a CMSIS function which configure:
-       - The SysTick Reload register with value passed as function parameter.
-       - Configure the SysTick IRQ priority to the lowest value (0x0F).
-       - Reset the SysTick Counter register.
-       - Configure the SysTick Counter clock source to be Core Clock Source (HCLK).
-       - Enable the SysTick Interrupt.
-       - Start the SysTick Counter.
-    
-    2. You can change the SysTick Clock source to be HCLK_Div8 by calling the
-       SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8) just after the
-       SysTick_Config() function call. The SysTick_CLKSourceConfig() is defined
-       inside the misc.c file.
-
-    3. You can change the SysTick IRQ priority by calling the
-       NVIC_SetPriority(SysTick_IRQn,...) just after the SysTick_Config() function 
-       call. The NVIC_SetPriority() is defined inside the core_cm4.h file.
-
-    4. To adjust the SysTick time base, use the following formula:
-                            
-         Reload Value = SysTick Counter Clock (Hz) x  Desired Time base (s)
-    
-       - Reload Value is the parameter to be passed for SysTick_Config() function
-       - Reload Value should not exceed 0xFFFFFF
-   */
+  
+  /* add two users */
+  addUser(utenti,"Damiano Di Stefano","A0001","11",1);
+  addUser(utenti,"Walter White","A0002","10",1);
+  
   if (SysTick_Config(SystemCoreClock / 1000000))
   { 
     /* Capture error */ 
@@ -100,20 +90,58 @@ int main(void)
 
   while (1)
   {
-    /* Toggle LED3 and LED6 */
-    STM_EVAL_LEDToggle(LED3);
-    STM_EVAL_LEDToggle(LED6);
-
-    /* Insert 50 ms delay */
-    Delay(50000);
-
-    /* Toggle LED4 and LED5 */
-    STM_EVAL_LEDToggle(LED4);
     STM_EVAL_LEDToggle(LED5);
-
-    /* Insert 100 ms delay */
-    Delay(100000);
+    printf("Insert student code:\n");
+    scanf("%s",p);
+    if(checkStudent(utenti,p))
+    {
+      STM_EVAL_LEDToggle(LED5);
+      Delay(1000000);
+      STM_EVAL_LEDToggle(LED6);
+      Delay(1000000);
+      STM_EVAL_LEDToggle(LED6);
+    }
+    else
+    {
+      STM_EVAL_LEDToggle(LED5);
+      Delay(1000000);
+      STM_EVAL_LEDToggle(LED3);
+      Delay(1000000);
+      STM_EVAL_LEDToggle(LED3);
+    }
   }
+}
+
+int checkStudent(struct studente *s, char *code)
+{
+  for(int i = 0; i < STUDENTS_LIM; i++)
+  {
+    if((s+i)->valid && (strcmp((s+i)->codice, code) == 0))
+    {
+      return ((s+i)->dipAccess[dip]) ? 1 : 0;
+    }
+  }
+  return 0;
+        
+}
+
+void addUser(struct studente *s, char *nomeCognome, char *codice, char *dipAccess, int val)
+{
+  if(utenti_counter < STUDENTS_LIM)
+  {
+    (s+utenti_counter)->nomeCognome = nomeCognome;
+    strcpy((s+utenti_counter)->codice, codice);
+    
+    for(int i = 0; i < DIP_ACCESS_NUM; i++)
+      (s+utenti_counter)->dipAccess[i] = (!isdigit(*(dipAccess + i))) ? 0 : *(dipAccess + i) - '0';
+    
+    (s+utenti_counter)->valid = val;
+    
+    utenti_counter++;
+  }
+  else
+    printf("Students array full\n");
+  
 }
 
 /**
